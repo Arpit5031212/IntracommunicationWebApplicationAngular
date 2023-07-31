@@ -1,0 +1,48 @@
+.liked {
+    color: red;
+}
+
+.add-post-btn {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.add-member-box {
+    width: 140px;
+    padding-left: 10px;
+    position: relative; 
+    left: 35rem; 
+    background-color: #706fd3;
+
+    .add-member-btn {
+        height: 30px;
+        width: 30px;
+        background-color: #474787;
+        border: none;
+        margin-left: 8px;
+    }
+}
+
+
+.add-post-div {
+    position: fixed;
+    bottom: 10px;
+    right: 100px;
+}
+
+.example-card {
+    min-width: fit-content;
+}
+
+.back-btn {
+    width: 30px;
+    height: 30px;
+    &:hover {
+        cursor: pointer;
+        background-color: lightgray;
+        border: 1px solid gray;
+        border-radius: 10px;
+    }
+}
+

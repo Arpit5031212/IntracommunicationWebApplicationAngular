@@ -1,0 +1,16 @@
+.outer-box {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    left: 60vw;
+    top: 20vh;
+
+
+    .sign-in-box {
+        height: 50vh;
+        width: 25vw;
+        min-width: fit-content;
+        min-height: fit-content;
+        text-align: center;
+    }
+}

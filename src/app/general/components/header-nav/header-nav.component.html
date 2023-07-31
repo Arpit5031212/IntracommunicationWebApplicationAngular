@@ -1,0 +1,78 @@
+<header class="d-flex align-items-center justify-content-between bg-secondary">
+    <div>
+        <mat-icon matSuffix>alternate_email</mat-icon>
+    </div>
+
+    <div>
+        <div class="input-group mb-3 mt-2">
+            <input #searchBar type="text" class="form-control" placeholder="Recipient's username"
+                aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append btn border d-flex justify-content-center align-items-center">
+                <mat-icon matSuffix (click)="searchUsers(searchBar.value)">search</mat-icon>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <mat-icon class="mx-2 action-btn" matSuffix data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" data-bs-toggle="offcanvas">notifications</mat-icon>
+
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+            aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+                <h4 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Notifications</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <button class="btn btn-primary" (click)="showAllInvitations()">Invitations</button>
+                <div>
+                    <mat-card class="m-3" *ngFor="let invitation of invitations">
+                        <mat-card-content>
+                            <h4 class="invites" (click)="acceptInvitation(invitation.inviteId)">
+                               Join Group {{invitation.groupId}}
+                            </h4>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+        <mat-icon class="mx-2 action-btn" matSuffix routerLink="/profile">manage_accounts</mat-icon>
+
+        <mat-icon class="mx-2 action-btn" matSuffix (click)="signout()">logout</mat-icon>
+
+    </div>
+</header>
+
+<mat-drawer-container class="example-container">
+    <mat-drawer class="border-black-subtle" mode="side" opened>
+        <div class="avatar-container bg-danger w-100">
+            <img class="avatar" src="\assets\penguin.png">
+            <div class="h5 bg-danger w-100 text-center">Skipper</div>
+        </div>
+
+        <div class="groups my-5">
+            <div class="d-flex align-items-center justify-content-between bg-primary mb-0 px-2">Groups
+                <div class="d-flex align-items-center justify-content-center">
+                    <mat-icon matSuffix (click)="viewAllGroups()">view_agenda</mat-icon>
+                    <mat-icon matSuffix routerLink="/create-group">add</mat-icon>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-primary-subtle" *ngFor="let group of joinedGroupInfo">
+                    <h4 (click)="sendGroupId(group.groupId)">{{group.groupName}}</h4>
+                </li>
+            </ul>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div>
+            <mat-card class="m-3" *ngFor="let user of users">
+                <mat-card-content>
+                    <h4>
+                        {{user.firstName}} {{user.lastName}}
+                    </h4>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

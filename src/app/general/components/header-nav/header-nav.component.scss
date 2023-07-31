@@ -1,0 +1,51 @@
+header {
+    position: relative;
+    top:0px;
+
+    .action-btn {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.invites {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.example-container {
+    width: 100vw;
+    height: calc(100vh - 62px);
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.avatar-container {
+    height: 120px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+
+    .avatar {
+        text-align: center;
+        height: 120px;
+        width: 120px;
+        border-radius: 50%;
+    }
+}
+
+.groups {
+    ul {
+        li {
+            &:hover {
+                cursor: pointer;
+                background-color: blanchedalmond;
+            }
+        }
+    }
+}

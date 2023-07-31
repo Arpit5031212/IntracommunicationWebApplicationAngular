@@ -1,0 +1,142 @@
+<div class="outer-box">
+    <mat-card class="sign-up-box">
+        <h2>Signup</h2>
+        <mat-card-content>
+            <form [formGroup]="signupForm" (ngSubmit)="OnSignup()">
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput
+                            [class.is-invalid]="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched"
+                            formControlName="firstName" placeholder="John">
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
+                            <small *ngIf="signupForm.get('firstName')?.errors?.['required']" class="text-danger">Required</small>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput
+                            [class.is-invalid]="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched"
+                            formControlName="lastName" placeholder="Doe">
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
+                            <small *ngIf="signupForm.get('lastName')?.errors?.['required']" class="text-danger">Required</small>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" placeholder="abc@gmail.com" type="email">
+                        <mat-icon matSuffix>mail</mat-icon>
+                        <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                            <small *ngIf="signupForm.get('email')?.errors?.['required']" class="text-danger">Required</small>
+                        </div>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contact</mat-label>
+                        <input matInput formControlName="contact" placeholder="9876543210">
+                        <mat-icon matSuffix>call</mat-icon>
+                        <div *ngIf="signupForm.get('contact')?.invalid && signupForm.get('contact')?.touched">
+                            <small *ngIf="signupForm.get('contact')?.errors?.['required']" class="text-danger">Required</small>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Address Line 1</mat-label>
+                            <input matInput formControlName="addressLine1" placeholder="House No., Building Name">
+                            <mat-icon matSuffix>apartment</mat-icon>
+                            <div *ngIf="signupForm.get('addressLine1')?.invalid && signupForm.get('addressLine1')?.touched">
+                                <small *ngIf="signupForm.get('addressLine1')?.errors?.['required']" class="text-danger">Required</small>
+                            </div>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Address Line 2</mat-label>
+                            <input matInput formControlName="addressLine2" placeholder="Road Name, Area, Colony">
+                            <mat-icon matSuffix>signpost</mat-icon>
+                            <div *ngIf="signupForm.get('addressLine2')?.invalid && signupForm.get('addressLine2')?.touched">
+                                <small *ngIf="signupForm.get('addressLine2')?.errors?.['required']" class="text-danger">Required</small>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city" placeholder="City">
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                            <div *ngIf="signupForm.get('city')?.invalid && signupForm.get('city')?.touched">
+                                <small *ngIf="signupForm.get('city')?.errors?.['required']" class="text-danger">Required</small>
+                            </div>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>State</mat-label>
+                            <input matInput formControlName="state" placeholder="State">
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                            <div *ngIf="signupForm.get('state')?.invalid && signupForm.get('state')?.touched">
+                                <small *ngIf="signupForm.get('state')?.errors?.['required']" class="text-danger">Required</small>
+                            </div>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Permanent City</mat-label>
+                            <input matInput formControlName="permanentCity" placeholder="Permanent City">
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                            <div *ngIf="signupForm.get('permanentCity')?.invalid && signupForm.get('permanentCity')?.touched">
+                                <small *ngIf="signupForm.get('permanentCity')?.errors?.['required']" class="text-danger">Required</small>
+                            </div>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Permanent State</mat-label>
+                            <input matInput formControlName="permanentState" placeholder="Permanent State">
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                            <div *ngIf="signupForm.get('permanentState')?.invalid && signupForm.get('permanentState')?.touched">
+                                <small *ngIf="signupForm.get('permanentState')?.errors?.['required']" class="text-danger">Required</small>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your password</mat-label>
+                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                            <small *ngIf="signupForm.get('password')?.errors?.['required']" class="text-danger">Required</small>
+                        </div>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput formControlName="confirmPassword" [type]="hide ? 'password' : 'text'" [class.is-invalid]="signupForm.errors?.['misMatch']">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                            <small class="text-danger" *ngIf="signupForm.errors?.['misMatch']">Password does not match</small>
+                        </div>
+                    </mat-form-field>
+
+                </div>
+                <button mat-raised-button color="primary" type="submit">SignUp</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

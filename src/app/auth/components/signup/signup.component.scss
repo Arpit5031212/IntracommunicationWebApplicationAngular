@@ -1,0 +1,18 @@
+.outer-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .sign-up-box {
+        text-align: center;
+        max-width: fit-content;
+        max-height: fit-content;
+    }
+
+
+    mat-form-field {
+        margin: 2px;
+    }
+
+
+}
