@@ -9,6 +9,11 @@ export class PostsService {
 
   constructor(private http: HttpClient) { }
 
+  getAllGroupMembers(groupId: number) {
+    return this.http.get<any>(`${environment.baseUrl}/Group/members/${groupId}`);
+  }
+
+
   getAllPostsInGroup(groupId: number): any {
     return this.http.get<any>(`${environment.baseUrl}/posts/group/${groupId}`);
   }
@@ -26,12 +31,15 @@ export class PostsService {
     return this.http.post<any>(`${environment.baseUrl}/posts/comment`, commentObj);
   }
 
+  deletePost(postId: number, userId: number): any {
+    return this.http.delete<any>(`${environment.baseUrl}/posts/delete/${postId}?userId=${userId}`);
+  }
+
   getAllComments(postId: any) {
     return this.http.get<any>(`${environment.baseUrl}/posts/comments/all?postId=${postId}`);
   }
 
-  deleteComment(commentId: any) {
-    return this.http.delete<any>(`${environment.baseUrl}/posts/delete-comment/${commentId}`);
+  deleteComment(commentId: any, userId: number) {
+    return this.http.delete<any>(`${environment.baseUrl}/posts/delete-comment/${commentId}?userId=${userId}`);
   }
-
 }

@@ -9,7 +9,6 @@ import { GeneralModule } from './general/general.module';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth/services/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HeaderNavComponent } from './general/components/header-nav/header-nav.component';
 
 @NgModule({
   declarations: [

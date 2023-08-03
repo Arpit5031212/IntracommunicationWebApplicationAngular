@@ -1,11 +1,11 @@
 <header class="d-flex align-items-center justify-content-between bg-secondary">
-    <div>
-        <mat-icon matSuffix>alternate_email</mat-icon>
+    <div class="mx-3" style="font-family: 'Orbitron', sans-serif; font-weight: bolder;">
+        chit ~ chat
     </div>
 
     <div>
         <div class="input-group mb-3 mt-2">
-            <input #searchBar type="text" class="form-control" placeholder="Recipient's username"
+            <input #searchBar type="text" class="form-control" placeholder="Search..."
                 aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append btn border d-flex justify-content-center align-items-center">
                 <mat-icon matSuffix (click)="searchUsers(searchBar.value)">search</mat-icon>

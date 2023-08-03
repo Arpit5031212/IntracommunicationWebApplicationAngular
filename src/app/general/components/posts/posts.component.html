@@ -1,37 +1,90 @@
 
+
+<div *ngIf="loading">
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>    
+</div>
+
+<div *ngIf="!loading">
     <div class="mt-2 w-100 d-flex align-items-center">
         <mat-icon class="back-btn" routerLink="/nav" matSuffix>navigate_before</mat-icon>
-        <div class="d-flex align-items-center add-member-box">
-            <strong>Add Someone</strong><button class="add-member-btn" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"><mat-icon matSuffix>add</mat-icon></button>
     
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add People...</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group mb-3">
-                                    <input #name type="text" class="form-control" placeholder="Enter name of the user...">
-                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchUser(name.value)">Find</button>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="add-member-box">
+        
+                <div class="d-flex align-items-center" >
+                    <strong>Add Someone</strong><button class="add-member-btn" data-bs-toggle="modal"
+                        data-bs-target="#AddMember"><mat-icon matSuffix>add</mat-icon></button>
+                </div>
+        
+                <!-- Add Someone Modal -->
+                <div class="modal fade" id="AddMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add People...</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="all-search-results">
-                                <div>
-                                    <mat-card class="m-3" *ngFor="let user of searchedUsers">
-                                        <mat-card-content class="d-flex justify-content-between align-items-center">
-                                            <h4 class="m-1">
-                                                {{user.firstName}} {{user.lastName}}
-                                            </h4>
-                                            <button class="btn btn-primary" (click)="addGroupMember(user.userId)">Add</button>
-                                        </mat-card-content>
-                                    </mat-card>
+                            <div class="modal-body">
+                                <div class="input-group mb-3">
+                                    <input #name type="text" class="form-control" placeholder="Enter name of the user...">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                                        (click)="searchUser(name.value)">Find</button>
+                                </div>
+                                <div class="all-search-results">
+                                    <div>
+                                        <mat-card class="m-3" *ngFor="let user of searchedUsers">
+                                            <mat-card-content class="d-flex justify-content-between align-items-center">
+                                                <h4 class="m-1">
+                                                    {{user.firstName}} {{user.lastName}}
+                                                </h4>
+                                                <button class="btn btn-primary"
+                                                    (click)="addGroupMember(user.userId)">Add</button>
+                                            </mat-card-content>
+                                        </mat-card>
+                                    </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="show-member-box">
+                
+                <div class="d-flex align-items-center">
+                    <strong>Show Members</strong><button class="show-member-btn" data-bs-toggle="modal"
+                        data-bs-target="#ShowMember" (click)="getAllMembers()"><mat-icon matSuffix>grid_view</mat-icon></button>
+                </div>
+        
+                <!-- Show all GroupMembers -->
+                <div class="modal fade" id="ShowMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Group Members...</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <div class="all-group-members">
+                                    <div>
+                                        <mat-card class="m-3" *ngFor="let member of groupMembers">
+                                            <mat-card-content class="d-flex justify-content-between align-items-center">
+                                                <h4 class="m-1">
+                                                    {{member.memberId}}
+                                                </h4>
+                                                <!-- <button class="btn btn-primary"
+                                                    (click)="removeMember(member.memberId)">Add</button> -->
+                                            </mat-card-content>
+                                        </mat-card>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,91 +92,90 @@
     </div>
     
     <hr class="mt-4 mb-4">
-
-
-<div *ngFor="let post of posts">
-    <mat-card class="example-card m-3 w-50">
-        <mat-card-header>
-            <mat-card-title>{{post.postedBy}}</mat-card-title>
-            <mat-card-subtitle>{{post.posteAt}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>{{post.postDescription}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-            <div class="d-flex justify-content-center align-items-center">
-                <button id="like-btn" mat-icon-button color="basic" (click)="like(post.postId)">
-                    <mat-icon>favorite</mat-icon>
-                </button>
-                <span style="margin-right: 10px;">Likes: {{post.likes.length}}</span>
-            </div>
-            <button mat-raised-button class="mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdropComments"
-                (click)="viewAllComments(post.postId)">Comments</button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdropComments" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Comments...</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <ul>
-                                <li *ngFor="let comment of comments">
-                                    <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <div>
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h6 class="card-subtitle mb-2 text-body-secondary">Commented By:
-                                                        {{comment.commentedBy}}</h6>
-                                                    <button class="btn"
-                                                        (click)="deleteComment(comment.commentId)"><mat-icon
-                                                            style="color: #d11a2a;">delete</mat-icon></button>
+    
+    
+    <div *ngFor="let post of posts">
+        <mat-card class="example-card m-3 w-50">
+            <mat-card-header>
+                <mat-card-title>{{post.postedBy}}</mat-card-title>
+                <mat-card-subtitle>{{post.posteAt}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{post.postDescription}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button id="like-btn" mat-icon-button color="basic" (click)="like(post.postId)">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                    <span style="margin-right: 10px;">Likes: {{post.likes.length}}</span>
+                </div>
+                <button mat-raised-button class="mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdropComments"
+                    (click)="viewAllComments(post.postId)">Comments</button>
+    
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdropComments" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Comments...</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul>
+                                    <li *ngFor="let comment of comments">
+                                        <div class="card" style="width: 18rem;">
+                                            <div class="card-body">
+                                                <div>
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <h6 class="card-subtitle mb-2 text-body-secondary">Commented By:
+                                                            {{comment.commentedBy}}</h6>
+                                                        <button class="btn"
+                                                            (click)="deleteComment(comment.commentId)"><mat-icon
+                                                                style="color: #d11a2a;">delete</mat-icon></button>
+                                                    </div>
                                                 </div>
+                                                <p class="card-text">{{comment.commentDescription}}</p>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary text-end">
+                                                    {{comment.commentedAt | date :'short'}}</h6>
                                             </div>
-                                            <p class="card-text">{{comment.commentDescription}}</p>
-                                            <h6 class="card-subtitle mb-2 text-body-secondary text-end">
-                                                {{comment.commentedAt | date :'short'}}</h6>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="mb-3 w-100 text-end">
-                                <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"
-                                    placeholder="Comment on this post..." #commentDescription></textarea>
-                                <button type="button" class="btn btn-primary"
-                                    (click)="addComment(commentDescription.value, post.postId)">Comment</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="mb-3 w-100 text-end">
+                                    <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"
+                                        placeholder="Comment on this post..." #commentDescription></textarea>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="addComment(commentDescription.value, post.postId)">Comment</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+    
+    
+                <button mat-raised-button class="mx-2" (click)="deletePost(post.postId)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    
+    
+    <button class="add-post-btn" mat-fab color="primary" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+        aria-expanded="false" aria-controls="collapseWidthExample">
+        <mat-icon>add</mat-icon>
+    </button>
+    <div style="min-height: 120px;" class="add-post-div">
+        <div class="collapse collapse-horizontal" id="collapseWidthExample">
+            <div class="card card-body" style="width: 300px;">
+                <div class="mb-3">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Post something..."
+                        #postDescription></textarea>
+                </div>
+                <button class="btn btn-primary" (click)="addPost(postDescription.value)">Post</button>
             </div>
-
-
-            <button mat-raised-button class="mx-2">Delete</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
-
-
-
-
-<button class="add-post-btn" mat-fab color="primary" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
-    aria-expanded="false" aria-controls="collapseWidthExample">
-    <mat-icon>add</mat-icon>
-</button>
-<div style="min-height: 120px;" class="add-post-div">
-    <div class="collapse collapse-horizontal" id="collapseWidthExample">
-        <div class="card card-body" style="width: 300px;">
-            <div class="mb-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Post something..."
-                    #postDescription></textarea>
-            </div>
-            <button class="btn btn-primary" (click)="addPost(postDescription.value)">Post</button>
         </div>
     </div>
 </div>

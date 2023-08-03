@@ -9,11 +9,12 @@
 }
 
 .add-member-box {
-    width: 140px;
-    padding-left: 10px;
+    width: 150px;
+    padding-left: 20px;
     position: relative; 
     left: 35rem; 
     background-color: #706fd3;
+    margin-right: 10px;
 
     .add-member-btn {
         height: 30px;
@@ -23,6 +24,23 @@
         margin-left: 8px;
     }
 }
+
+.show-member-box {
+    width: 150px;
+    padding-left: 10px;
+    position: relative; 
+    left: 35rem; 
+    background-color: #706fd3;
+
+    .show-member-btn {
+        height: 30px;
+        width: 30px;
+        background-color: #474787;
+        border: none;
+        margin-left: 8px;
+    }
+}
+
 
 
 .add-post-div {
@@ -45,4 +63,26 @@
         border-radius: 10px;
     }
 }
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
 

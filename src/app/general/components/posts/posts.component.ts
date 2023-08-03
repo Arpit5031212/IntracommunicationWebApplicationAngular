@@ -13,10 +13,13 @@ import { UserService } from '../../services/user.service';
 export class PostsComponent implements OnInit {
 
   // isLiked: boolean = false;
+  loading: boolean = true;
+
   posts: any[] = [];
   groupId!: number;
   comments: any[] = [];
   searchedUsers: any[] = [];
+  groupMembers: any[] = [];
 
   userId: number = Number(localStorage.getItem("user-Id"));
 
@@ -30,6 +33,7 @@ export class PostsComponent implements OnInit {
     this.userService.getSearchedUsers(name).subscribe({
       next: (res: any) => {
         this.searchedUsers = res;
+        
         console.log(this.searchedUsers)
       },
       error: (error: any) => {
@@ -37,6 +41,21 @@ export class PostsComponent implements OnInit {
       }
     })
   }
+
+  getAllMembers() {
+    this.postsService.getAllGroupMembers(this.groupId).subscribe({
+      next: (res: any) => {
+        this.groupMembers = res;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
+
+  // removemember(memberId: number) {
+    
+  // }
 
 
   addGroupMember(memberId: any) {
@@ -79,9 +98,11 @@ export class PostsComponent implements OnInit {
     this.postsService.getAllPostsInGroup(this.groupId).subscribe({
       next: (res: any) => {
         this.posts = res;
+        this.loading = false;
       },
       error: (error: any) => {
         console.error("cant fetch posts", error);
+        this.loading = false;
       }
     })
   }
@@ -124,8 +145,21 @@ export class PostsComponent implements OnInit {
   }
 
   deleteComment(commentId: any) {
-    this.postsService.deleteComment(commentId).subscribe({
-      next: (res) => {
+    const userId = Number(localStorage.getItem("user-Id"));
+    this.postsService.deleteComment(commentId, userId).subscribe({
+      next: (res: any) => {
+        console.log(res.message);
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
+
+  deletePost(postId: number) {
+    const userId = Number(localStorage.getItem("user-Id"));
+    this.postsService.deletePost(postId, userId).subscribe({
+      next: (res: any) => {
         console.log(res.message);
       },
       error: (error: any) => {
